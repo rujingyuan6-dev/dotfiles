@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 # ============================================
 # 🚀 dotfiles 一键恢复脚本
-# 用法: curl -fsSL https://raw.githubusercontent.com/rujingyuan6-dev/dotfiles/master/bootstrap.sh | bash
-# 或者: bash <(curl -fsSL ...)
+# 在新电脑上跑这个就够了，它会:
+#   1. 克隆 dotfiles 配置到家目录
+#   2. 安装所有工具 (zsh, nvim, lazygit, bat, rg, fd, ...)
+#   3. 配置主题、字体、插件
+#
+# 用法:
+#   bash <(curl -fsSL https://raw.githubusercontent.com/rujingyuan6-dev/dotfiles/master/bootstrap.sh)
 # ============================================
 set -e
 
@@ -65,15 +70,54 @@ install_binary() {
   fi
 }
 
-# ---------- 3. 系统工具 ----------
-info "\n=== 系统工具 ==="
+# ---------- 3. 基础工具 ----------
+info "\n=== 基础工具 ==="
 install_pkg git git
 install_pkg curl curl
 install_pkg wget wget
 install_pkg unzip unzip
 install_pkg xclip xclip
 
-# ---------- 4. zsh ----------
+# ---------- 4. 克隆配置到 home 目录 ----------
+info "\n=== 恢复配置 ==="
+DOTFILES_REPO="https://github.com/rujingyuan6-dev/dotfiles.git"
+DOTFILES_BARE="$HOME/.dotfiles-bare"
+
+if git --git-dir="$DOTFILES_BARE" --work-tree="$HOME" rev-parse &>/dev/null 2>&1; then
+  ok "dotfiles 已配置，拉取最新..."
+  git --git-dir="$DOTFILES_BARE" --work-tree="$HOME" pull 2>/dev/null && ok "已更新" || warn "拉取失败"
+elif [[ -d "$HOME/.git" ]]; then
+  warn "home 目录已有 git，检查是否是本项目的 dotfiles..."
+  if git -C "$HOME" remote get-url origin 2>/dev/null | grep -q "rujingyuan6-dev/dotfiles"; then
+    ok "仓库已存在，拉取最新..."
+    git -C "$HOME" pull 2>/dev/null || warn "拉取失败"
+  else
+    warn "检测到其它 git 仓库，跳过配置克隆（请手动处理）"
+  fi
+else
+  info "克隆 dotfiles 到 home 目录..."
+  git clone --bare "$DOTFILES_REPO" "$DOTFILES_BARE" 2>/dev/null
+
+  # checkout，冲突文件自动备份
+  git --git-dir="$DOTFILES_BARE" --work-tree="$HOME" checkout master 2>/dev/null || {
+    warn "检出配置时发生冲突，备份已有文件..."
+    CONFLICTS=$(git --git-dir="$DOTFILES_BARE" --work-tree="$HOME" checkout master 2>&1 | grep "^\s" | tr -d ' ')
+    BACKUP_DIR="$HOME/dotfiles-backup-$(date +%Y%m%d%H%M%S)"
+    mkdir -p "$BACKUP_DIR"
+    for f in $CONFLICTS; do
+      mkdir -p "$(dirname "$BACKUP_DIR/$f")"
+      mv "$HOME/$f" "$BACKUP_DIR/$f" 2>/dev/null
+    done
+    info "冲突文件已备份到 $BACKUP_DIR"
+    git --git-dir="$DOTFILES_BARE" --work-tree="$HOME" checkout master 2>/dev/null
+  }
+
+  # 不显示 home 目录的未跟踪文件（否则全是红点）
+  git --git-dir="$DOTFILES_BARE" --work-tree="$HOME" config status.showUntrackedFiles no
+  ok "dotfiles 配置已恢复"
+fi
+
+# ---------- 5. zsh ----------
 info "\n=== Shell ==="
 if ! command -v zsh &>/dev/null; then
   install_pkg zsh zsh
@@ -93,7 +137,7 @@ else
   ok "Oh My Zsh 已安装"
 fi
 
-# ---------- 5. 工具安装 ----------
+# ---------- 6. 工具安装 ----------
 info "\n=== 工具安装 ==="
 
 # fzf
@@ -221,7 +265,7 @@ if ! command -v byobu &>/dev/null; then
   install_pkg byobu byobu 2>/dev/null || warn "byobu 需要手动安装 (apt install byobu)"
 fi
 
-# ---------- 6. 安装字体 ----------
+# ---------- 7. 安装字体 ----------
 info "\n=== 字体 ==="
 if [[ ! -f "$HOME/.local/share/fonts/HackNerdFont-Regular.ttf" ]]; then
   info "安装 Nerd Font..."
@@ -235,7 +279,7 @@ else
   ok "Nerd Font 已安装"
 fi
 
-# ---------- 7. 安装 lazy.nvim 插件 ----------
+# ---------- 8. 安装 lazy.nvim 插件 ----------
 info "\n=== Neovim 插件 ==="
 if [[ -f "$HOME/.local/bin/nvim" ]]; then
   info "安装 nvim 插件（首次安装需下载，稍等片刻）..."
@@ -243,7 +287,7 @@ if [[ -f "$HOME/.local/bin/nvim" ]]; then
   ok "nvim 插件安装完成"
 fi
 
-# ---------- 8. 完成 ----------
+# ---------- 9. 完成 ----------
 echo ""
 echo -e "${GREEN}╔══════════════════════════════════════════╗${NC}"
 echo -e "${GREEN}║  🎉  dotfiles 一键恢复完成！              ║${NC}"
