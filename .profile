@@ -25,3 +25,9 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
+# 如果 zsh 可用则启动 zsh
+if [ -n "$BASH" ] && [ -x "$HOME/.local/bin/zsh" ] && [ -z "$ZSH_VERSION" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+    exec "$HOME/.local/bin/zsh"
+fi

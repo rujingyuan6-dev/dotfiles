@@ -10,6 +10,9 @@
 # 要跟踪的 shell 配置
 !/.bashrc
 !/.profile
+
+# Zsh
+!/.zshrc
 !/.bash_aliases
 !/.bash_functions
 
