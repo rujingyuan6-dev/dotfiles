@@ -7,6 +7,12 @@
 .*
 !/.gitignore
 
+# 允许部分 .config 目录
+!/.config/
+!/.config/nvim/
+/.config/nvim/plugin/
+/.config/nvim/lazy-lock.json
+
 # 要跟踪的 shell 配置
 !/.bashrc
 !/.profile
@@ -41,7 +47,6 @@
 .cache/
 .local/
 .snap/
-.config/
 .gnome/
 .gnome2/
 .gtkrc-2.0
