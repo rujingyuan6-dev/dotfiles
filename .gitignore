@@ -1,0 +1,132 @@
+# ============================================
+# Dotfiles repo — 排除 home 目录杂文件
+# 默认忽略所有隐藏文件，只保留手动要跟踪的
+# ============================================
+
+# 忽略所有隐藏文件和目录
+.*
+!/.gitignore
+
+# 要跟踪的 shell 配置
+!/.bashrc
+!/.profile
+!/.bash_aliases
+!/.bash_functions
+
+# SSH 配置（只跟踪 config 文件，不跟踪密钥）
+!/.ssh/
+/.ssh/*
+!/.ssh/config
+
+# Git 配置
+!/.gitconfig
+!/.gitmessage
+
+# 杂项配置（按需放开）
+!/.npmrc
+!/.condarc
+
+# --- 以下全部忽略 ---
+
+# 系统 & 缓存
+.cache/
+.local/
+.snap/
+.config/
+.gnome/
+.gnome2/
+.gtkrc-2.0
+.gtkrc
+.xauthority
+.dbus/
+.esd_auth
+.ICEauthority
+.fontconfig/
+.fonts/
+.themes/
+.icons/
+
+# shell 历史
+.bash_history
+.bash_logout
+.zsh_history
+.zhistory
+.zcompdump*
+.python_history
+.mysql_history
+.psql_history
+.rediscli_history
+.wget-hsts
+.lesshst
+.sudo_as_admin_successful
+.viminfo
+.node_repl_history
+.shell_history
+
+# 开发工具缓存
+.npm/
+.npm-global/
+.cargo/
+.rustup/
+.go/
+.dotnet/
+.vim/
+.neovim/
+.antigravity-server/
+.codex/
+.mamba/
+.conda/
+.gemini/
+.copilot/
+.vscode/
+.vscode-server/
+
+# SSH 密钥 & 认证文件
+.ssh/*.pub
+.ssh/id_*
+.ssh/id_*.pub
+.ssh/authorized_keys
+.ssh/known_hosts
+.ssh/known_hosts.old
+.ssh/authorized_keys2
+
+# GPG
+.gnupg/
+.pgp/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+jspm_packages/
+
+# 桌面 & 用户目录
+Desktop/
+Documents/
+Downloads/
+Music/
+Pictures/
+Videos/
+Templates/
+Public/
+examples.desktop
+
+# 项目目录（非 dotfile 的项目文件夹不跟踪）
+16Bifido_ANI_20260509/
+20260513_16s_diversity/
+32Bifido_analysis_20260509/
+HRexperiment_20260509/
+Kraken2/
+MIC_test/
+bowtie2/
+database/
+reference/
+snap/
