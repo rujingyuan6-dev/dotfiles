@@ -41,6 +41,9 @@
 !/.npmrc
 !/.condarc
 
+# tmux
+!/.tmux.conf
+
 # --- 以下全部忽略 ---
 
 # 系统 & 缓存
