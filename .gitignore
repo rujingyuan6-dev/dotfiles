@@ -154,3 +154,4 @@ snap/
 /.byobu/backup/
 !/.config/btop/
 !/.config/yazi/
+!bootstrap.sh
