@@ -271,6 +271,34 @@ if ! command -v byobu &>/dev/null; then
   install_pkg byobu byobu 2>/dev/null || warn "byobu 需要手动安装 (apt install byobu)"
 fi
 
+# conda + mamba
+if ! command -v conda &>/dev/null; then
+  info "安装 Miniconda..."
+  curl -L -o /tmp/miniconda.sh "https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh" 2>/dev/null
+  bash /tmp/miniconda.sh -b -p "$HOME/miniconda3" -u 2>/dev/null && ok "Miniconda 安装成功" || warn "Miniconda 安装失败"
+fi
+if command -v conda &>/dev/null || [[ -f "$HOME/miniconda3/bin/conda" ]]; then
+  CONDACMD="$HOME/miniconda3/bin/conda"
+  # 配置镜像源
+  cat > "$HOME/.condarc" << 'CONDARC'
+channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+show_channel_urls: true
+auto_activate_base: false
+CONDARC
+  # 安装 mamba
+  if ! "$CONDACMD" list mamba &>/dev/null; then
+    info "安装 mamba..."
+    "$CONDACMD" install -y mamba 2>/dev/null && ok "mamba 安装成功" || warn "mamba 安装失败"
+  else
+    ok "mamba 已安装"
+  fi
+  # conda init（但跳过，因为 .zshrc 里已经通过 dotfiles 配置了）
+  ok "conda 已安装"
+fi
+
 # ---------- 7. 安装字体 ----------
 info "\n=== 字体 ==="
 if [[ ! -f "$HOME/.local/share/fonts/HackNerdFont-Regular.ttf" ]]; then
