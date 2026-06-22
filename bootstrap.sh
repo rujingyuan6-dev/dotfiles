@@ -101,15 +101,21 @@ else
   # checkout，冲突文件自动备份
   git --git-dir="$DOTFILES_BARE" --work-tree="$HOME" checkout master 2>/dev/null || {
     warn "检出配置时发生冲突，备份已有文件..."
-    CONFLICTS=$(git --git-dir="$DOTFILES_BARE" --work-tree="$HOME" checkout master 2>&1 | grep "^\s" | tr -d ' ')
+    # 获取冲突的文件列表（tab 缩进行）
+    CONFLICTS=$(git --git-dir="$DOTFILES_BARE" --work-tree="$HOME" checkout master 2>&1 | grep $'\t' | tr -d '\t')
     BACKUP_DIR="$HOME/dotfiles-backup-$(date +%Y%m%d%H%M%S)"
     mkdir -p "$BACKUP_DIR"
     for f in $CONFLICTS; do
-      mkdir -p "$(dirname "$BACKUP_DIR/$f")"
-      mv "$HOME/$f" "$BACKUP_DIR/$f" 2>/dev/null
+      if [[ -f "$HOME/$f" ]]; then
+        mkdir -p "$(dirname "$BACKUP_DIR/$f")" 2>/dev/null
+        mv "$HOME/$f" "$BACKUP_DIR/$f" 2>/dev/null
+      fi
     done
     info "冲突文件已备份到 $BACKUP_DIR"
-    git --git-dir="$DOTFILES_BARE" --work-tree="$HOME" checkout master 2>/dev/null
+    # 再次尝试检出
+    git --git-dir="$DOTFILES_BARE" --work-tree="$HOME" checkout master 2>/dev/null || {
+      err "检出仍然失败，请手动处理 $BACKUP_DIR 中的文件"
+    }
   }
 
   # 不显示 home 目录的未跟踪文件（否则全是红点）
