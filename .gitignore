@@ -153,3 +153,4 @@ snap/
 !/.byobu/
 /.byobu/backup/
 !/.config/btop/
+!/.config/yazi/

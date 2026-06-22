@@ -1,0 +1,12 @@
+[manager]
+[manager.border]
+style = "none"
+
+[status]
+separator_open = ""
+separator_close = ""
+separator_style = ""
+
+[mode]
+normal_main = { fg = "#a6e3a1", bg = "#1e1e2e" }
+normal_alt = { fg = "#cdd6f4", bg = "#313244" }
