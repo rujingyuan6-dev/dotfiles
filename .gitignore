@@ -148,3 +148,7 @@ database/
 reference/
 snap/
 !CHEATSHEET.md
+
+# byobu 配置
+!/.byobu/
+/.byobu/backup/

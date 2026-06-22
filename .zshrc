@@ -140,14 +140,19 @@ cheatsheet() {
    git status                 # 查看更改
    ga . && gcmsg "x" && gp    # 完整三连（alias）
 
-🐚  tmux 终端复用器
-   tmux                       # 启动
-   Ctrl+A  ?                  # 查看全部快捷键
-   Ctrl+A  | / -              # 左右/上下分屏
-   Ctrl+A  ←↑↓→              # 切换窗格
-   Ctrl+A  c                  # 新标签页
-   Ctrl+A  d                  # 断开（程序继续跑）
-   tmux a                     # 重新连回去
+🪟  byobu / tmux 终端复用器
+   byobu                      # 🎯 推荐！启动（带状态栏/快捷键提示）
+   tmux                       # 或者直接用 tmux
+   F9          byobu 配置菜单
+   Ctrl+A  ?  查看全部快捷键
+   Ctrl+A  |  左右分屏
+   Ctrl+A  -  上下分屏
+   Ctrl+A  ←↑↓→  切换窗格
+   Ctrl+A  c  新标签页
+   Ctrl+A  d  断开（程序继续在后台跑）
+   byobu -r   重新连回去
+   F2         新建窗口（byobu 快捷键）
+   F3/F4      上一个/下一个窗口
 
 🐚  Shell 快捷键
    Ctrl+R    模糊搜索历史命令
