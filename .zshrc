@@ -123,6 +123,9 @@ export EDITOR="nvim"
 # Starship 提示符
 eval "$(starship init zsh)"
 
+# zoxide — 智能 cd（自动学习常用目录）
+eval "$(zoxide init zsh)"
+
 # ============================================
 # 🧰 工具速查 — 输入 cheatsheet 即可查看
 # ============================================
@@ -181,8 +184,9 @@ cheatsheet() {
    mamba install <包>        # 更快安装（需先 conda install mamba）
 
 📁  目录跳转 & 文件管理
-   z <关键词>           # 跳到常用目录
-      例: z down  → 跳到 ~/Downloads
+   z <关键词>           # 🎯 智能跳转目录（zoxide，自动学习）
+      例: z down  → 跳到 ~/Downloads   z dot  → 跳到 dotfiles
+   zi                   # 交互式选择目录（支持模糊搜索）
    yazi                 # 🎯 推荐的终端文件管理器（更快、更现代）
    ranger               # 另一款文件管理器，功能全面
                         通用操作: ↑↓ 选择, Enter 进入, q 退出

@@ -226,6 +226,18 @@ else
   ok "starship 已安装"
 fi
 
+# zoxide
+if ! command -v zoxide &>/dev/null; then
+  info "安装 zoxide..."
+  LATEST=$(curl -s https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest | grep "tag_name" | cut -d'"' -f4)
+  VER=${LATEST#v}
+  curl -L -o /tmp/zoxide.tar.gz "https://github.com/ajeetdsouza/zoxide/releases/download/${LATEST}/zoxide-${VER}-x86_64-unknown-linux-musl.tar.gz" 2>/dev/null
+  cd /tmp && tar xzf zoxide.tar.gz && cp zoxide "$HOME/.local/bin/"
+  chmod +x "$HOME/.local/bin/zoxide" && ok "zoxide 安装成功" || warn "zoxide 安装失败"
+else
+  ok "zoxide 已安装"
+fi
+
 # yazi
 if ! command -v yazi &>/dev/null; then
   info "安装 yazi..."
