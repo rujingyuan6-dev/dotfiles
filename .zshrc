@@ -173,6 +173,13 @@ cheatsheet() {
 ✏️  Neovim 编辑器
    vi <文件>            # 打开编辑（已 alias）
 
+🐍  Conda 环境管理
+   conda activate <环境名>   # 激活环境
+   conda deactivate          # 退出环境
+   conda env list            # 列出所有环境
+   conda create -n <名字> python=3.x  # 新建环境
+   mamba install <包>        # 更快安装（需先 conda install mamba）
+
 📁  目录跳转 & 文件管理
    z <关键词>           # 跳到常用目录
       例: z down  → 跳到 ~/Downloads
@@ -190,3 +197,19 @@ EOF
 # 加个更短的名字
 alias cs="cheatsheet"
 alias helpme="cheatsheet"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/rujingyuan/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/rujingyuan/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/rujingyuan/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/rujingyuan/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

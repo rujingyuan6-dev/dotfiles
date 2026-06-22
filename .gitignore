@@ -155,3 +155,4 @@ snap/
 !/.config/btop/
 !/.config/yazi/
 !bootstrap.sh
+miniconda3/
