@@ -111,3 +111,6 @@ alias catt="bat -A"          # 显示不可见字符
 alias catp="bat -p"          # 带行号的纯文本
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_THEME="Dracula"   # 主题（可换：catppuccin, gruvbox, Nord 等）
+
+# pip 用户包路径
+export PATH="$(python3 -c "import site; print(site.USER_BASE)")/bin:$PATH"
