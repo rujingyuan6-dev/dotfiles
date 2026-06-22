@@ -114,3 +114,8 @@ export BAT_THEME="Dracula"   # 主题（可换：catppuccin, gruvbox, Nord 等�
 
 # pip 用户包路径
 export PATH="$(python3 -c "import site; print(site.USER_BASE)")/bin:$PATH"
+
+# Neovim
+alias vi="nvim"
+alias vim="nvim"
+export EDITOR="nvim"
