@@ -122,3 +122,66 @@ export EDITOR="nvim"
 
 # Starship 提示符
 eval "$(starship init zsh)"
+
+# ============================================
+# 🧰 工具速查 — 输入 cheatsheet 即可查看
+# ============================================
+cheatsheet() {
+  cat <<'EOF'
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🧰  工具速查手册
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔐  SSH 远程连接
+   ssh server                 # 免密登录服务器
+   ssh rujingyuan@192.168.53.18  # 完整写法
+
+📂  Git 版本控制
+   lazygit                    # Git 图形界面（推荐！）
+   git status                 # 查看更改
+   git add . && git commit -m "msg" && git push  # 完整流程
+
+🐚  Shell 快捷键
+   Ctrl+R    模糊搜索历史命令
+   Ctrl+T    模糊搜索文件名
+   Ctrl+D    退出终端
+   Tab 补全  按一下补全，两下列表
+
+🔍  文件搜索
+   fd <名字>           # 搜索文件（比 find 快）
+   fd -e py            # 只搜 .py 文件
+   rg <关键词>          # 搜索文件内容（比 grep 快）
+   rg -i <关键词>       # 忽略大小写
+
+📖  查看文件
+   bat <文件>           # 带语法高亮的 cat
+   cat <文件>           # 纯文本显示（已 alias）
+   tldr <命令>          # 查看命令速查（比 man 精简）
+      例: tldr tar  tldr ffmpeg  tldr rg
+
+✏️  Neovim 编辑器
+   vi <文件>            # 打开编辑（alias）
+   vim <文件>           # 同上
+   快捷键:  :q 退出  :w 保存  :wq 保存退出
+            dd 删行  yy 复制行  p 粘贴
+            gg 到文件头  G 到文件尾
+
+📁  目录跳转
+   z <关键词>           # 跳转到常用目录（z 插件）
+      例: z down  → 跳到 ~/Downloads
+
+🚀  命令别名
+   cat = bat -pp        # 带高亮的 cat
+   vi/vim = nvim        # 编辑
+   python = python3     # 见下方
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💡  记不住就输入:   cheatsheet
+    想查某命令用法:  tldr <命令>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+}
+
+# 加个更短的名字
+alias cs="cheatsheet"
+alias helpme="cheatsheet"

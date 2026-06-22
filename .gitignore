@@ -144,3 +144,4 @@ bowtie2/
 database/
 reference/
 snap/
+!CHEATSHEET.md
