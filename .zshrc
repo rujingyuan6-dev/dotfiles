@@ -163,8 +163,9 @@ cheatsheet() {
    fd <名字>           # 搜索文件（比 find 快）
    rg <关键词>          # 搜索文件内容（比 grep 快）
 
-📖  查看文件
+📖  查看文件 & 系统监控
    bat <文件>           # 带语法高亮的 cat
+   htop                 # 系统进程监控（像任务管理器）
    tldr <命令>          # 命令速查（精简版 man）
       例: tldr tar  tldr ffmpeg
 
