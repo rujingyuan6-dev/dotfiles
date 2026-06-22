@@ -249,6 +249,22 @@ else
   ok "yazi 已安装"
 fi
 
+# nvm + node
+if [[ ! -d "$HOME/.nvm" ]]; then
+  info "安装 nvm + Node.js LTS..."
+  curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash 2>/dev/null
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  # 安装 LTS 版并设为默认
+  nvm install --lts 2>/dev/null
+  nvm alias default lts/* 2>/dev/null
+  # 删除可能导致冲突的 .npmrc
+  [[ -f "$HOME/.npmrc" ]] && grep -q "prefix" "$HOME/.npmrc" && rm "$HOME/.npmrc"
+  ok "nvm + Node.js 安装成功（$(node -v 2>/dev/null)）"
+else
+  ok "nvm 已安装"
+fi
+
 # btop
 if ! command -v btop &>/dev/null; then
   info "安装 btop..."

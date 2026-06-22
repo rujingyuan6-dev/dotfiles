@@ -156,3 +156,4 @@ snap/
 !/.config/yazi/
 !bootstrap.sh
 miniconda3/
+.nvm/

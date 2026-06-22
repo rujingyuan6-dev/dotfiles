@@ -176,6 +176,12 @@ cheatsheet() {
 ✏️  Neovim 编辑器
    vi <文件>            # 打开编辑（已 alias）
 
+🟢  Node.js (nvm)
+   nvm install --lts       # 安装最新的 LTS 版 Node
+   nvm use <版本>           # 切换版本
+   nvm ls                  # 列出已安装版本
+   nvm alias default lts/* # 设置默认版本
+
 🐍  Conda 环境管理
    conda activate <环境名>   # 激活环境
    conda deactivate          # 退出环境
