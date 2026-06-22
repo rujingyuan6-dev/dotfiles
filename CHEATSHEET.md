@@ -126,3 +126,17 @@ z dot              # 跳到 dotfiles 相关目录
 ---
 
 > 💡 记不住？终端里输入 `cheatsheet` 或 `cs` 或 `helpme` 就能看到精简版
+
+---
+
+## 🚀 换新电脑时一键恢复
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/rujingyuan6-dev/dotfiles/master/bootstrap.sh)
+```
+
+这条命令会：
+1. 克隆 dotfiles 配置到 `~`（冲突文件自动备份）
+2. 安装全部工具到 `~/.local/bin`
+3. 安装 Oh My Zsh、Nerd Font、nvim 插件
+4. 设置 starship 主题
