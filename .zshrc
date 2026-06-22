@@ -104,3 +104,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# bat 配置
+alias cat="bat -pp"          # 纯文本（无行号）的 bat
+alias catt="bat -A"          # 显示不可见字符
+alias catp="bat -p"          # 带行号的纯文本
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export BAT_THEME="Dracula"   # 主题（可换：catppuccin, gruvbox, Nord 等）
