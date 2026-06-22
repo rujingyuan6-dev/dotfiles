@@ -13,6 +13,12 @@
 
 # Zsh
 !/.zshrc
+
+# fzf
+!/.fzf/
+/.fzf/bin/fzf
+!/.fzf.bash
+!/.fzf.zsh
 !/.bash_aliases
 !/.bash_functions
 
