@@ -152,3 +152,4 @@ snap/
 # byobu 配置
 !/.byobu/
 /.byobu/backup/
+!/.config/btop/

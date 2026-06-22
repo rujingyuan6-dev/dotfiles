@@ -165,7 +165,8 @@ cheatsheet() {
 
 📖  查看文件 & 系统监控
    bat <文件>           # 带语法高亮的 cat
-   htop                 # 系统进程监控（像任务管理器）
+   htop                 # 系统进程监控（经典）
+   btop                 # 🎯 更酷的系统监控（带图表/主题）
    tldr <命令>          # 命令速查（精简版 man）
       例: tldr tar  tldr ffmpeg
 
