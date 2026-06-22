@@ -131,76 +131,28 @@ eval "$(zoxide init zsh)"
 # ============================================
 cheatsheet() {
   cat <<'EOF'
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🧰  工具速查手册
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🧰  终端工具速查
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🔐  SSH 远程连接
-   ssh server                 # 免密登录服务器
+📂 Git  ➜  lazygit                图形界面，不用记命令
+📁 跳转 ➜  z <关键词>             zoxide 智能跳目录
+🔍 文件 ➜  fd <词>  内容 ➜ rg <词>
+📖 查看 ➜  bat <文件>             带高亮的 cat
+✏️ 编辑  ➜  vi <文件>             nvim 编辑器
+🪟 分屏  ➜  byobu                 终端分屏多任务
+📊 监控  ➜  btop                  系统资源监控
+💡 速查  ➜  tldr <命令>           精简版 man
 
-📂  Git 版本控制
-   lazygit                    # Git 图形界面（推荐！）
-   git status                 # 查看更改
-   ga . && gcmsg "x" && gp    # 完整三连（alias）
+🐍 Python  ➜  mamba install/create
+🟢 Node    ➜  nvm install --lts
+💾 备份    ➜  lazygit → push
 
-🪟  byobu / tmux 终端复用器
-   byobu                      # 🎯 推荐！启动（带状态栏/快捷键提示）
-   tmux                       # 或者直接用 tmux
-   F9          byobu 配置菜单
-   Ctrl+A  ?  查看全部快捷键
-   Ctrl+A  |  左右分屏
-   Ctrl+A  -  上下分屏
-   Ctrl+A  ←↑↓→  切换窗格
-   Ctrl+A  c  新标签页
-   Ctrl+A  d  断开（程序继续在后台跑）
-   byobu -r   重新连回去
-   F2         新建窗口（byobu 快捷键）
-   F3/F4      上一个/下一个窗口
-
-🐚  Shell 快捷键
-   Ctrl+R    模糊搜索历史命令
-   Ctrl+T    模糊搜索文件名
-   Tab 补全  按一下补全，两下列表
-
-🔍  文件搜索
-   fd <名字>           # 搜索文件（比 find 快）
-   rg <关键词>          # 搜索文件内容（比 grep 快）
-
-📖  查看文件 & 系统监控
-   bat <文件>           # 带语法高亮的 cat
-   htop                 # 系统进程监控（经典）
-   btop                 # 🎯 更酷的系统监控（带图表/主题）
-   tldr <命令>          # 命令速查（精简版 man）
-      例: tldr tar  tldr ffmpeg
-
-✏️  Neovim 编辑器
-   vi <文件>            # 打开编辑（已 alias）
-
-🟢  Node.js (nvm)
-   nvm install --lts       # 安装最新的 LTS 版 Node
-   nvm use <版本>           # 切换版本
-   nvm ls                  # 列出已安装版本
-   nvm alias default lts/* # 设置默认版本
-
-🐍  Conda 环境管理
-   conda activate <环境名>   # 激活环境
-   conda deactivate          # 退出环境
-   conda env list            # 列出所有环境
-   conda create -n <名字> python=3.x  # 新建环境
-   mamba install <包>        # 更快安装（需先 conda install mamba）
-
-📁  目录跳转 & 文件管理
-   z <关键词>           # 🎯 智能跳转目录（zoxide，自动学习）
-      例: z down  → 跳到 ~/Downloads   z dot  → 跳到 dotfiles
-   zi                   # 交互式选择目录（支持模糊搜索）
-   yazi                 # 🎯 推荐的终端文件管理器（更快、更现代）
-   ranger               # 另一款文件管理器，功能全面
-                        通用操作: ↑↓ 选择, Enter 进入, q 退出
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💡  记不住就输入:   cheatsheet   或   cs
-    想查某命令用法:  tldr <命令>
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔑 Ctrl+R 搜历史 | Ctrl+T 搜文件 | Tab 补全
+📖 完整文档: cat ~/CHEATSHEET.md
+🌐 GitHub: rujingyuan6-dev/dotfiles
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 }
 

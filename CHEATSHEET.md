@@ -1,142 +1,236 @@
 # 🧰 工具速查手册
 
-## 🔐 SSH 远程连接
+> 记不住？终端里输入 `cheatsheet`（或 `cs` / `helpme`）查看精简版
+
+---
+
+## 📖 怎么用这套环境？
+
+### 工作流：从打开终端开始
 
 ```bash
-ssh server                          # 免密登录服务器（最常用）
-ssh rujingyuan@192.168.53.18        # 完整写法，记不住 IP 就用上面的
+# 1. 打开终端 → 自动进入 zsh + starship 主题
+# 2. 想去哪个目录？
+z project          # 智能跳转（zoxide，自动学习）
+zi                 # 交互式选目录
+
+# 3. 要找什么文件？
+fd "关键词"         # 搜文件名（比 find 快几十倍）
+rg "关键词"         # 搜文件内容（比 grep 快几十倍）
+
+# 4. 想编辑文件？
+vi some-file.py    # nvim 编辑器
+
+# 5. Git 操作？
+lazygit            # 图形界面，不用记命令
+
+# 6. 查命令怎么用？
+tldr ffmpeg        # 速查（比 man 精简）
 ```
 
-> 配置在 `~/.ssh/config`，由 git 管理
+---
+
+## 🚪 SSH 远程连接
+
+```bash
+ssh server                          # 免密登录服务器
+scp file.txt server:~/              # 复制文件到服务器
+```
+
+> 配置在 `~/.ssh/config`，由 git 管理。密码？不存在。
 
 ---
 
 ## 📂 Git 版本控制
 
-```bash
-lazygit                     # 🎯 推荐！图形界面，不用记命令
-git status                  # 查看哪些文件改了
-git add <文件>               # 暂存文件
-git commit -m "说明"         # 提交
-git push                    # 推送到 GitHub
-git pull                    # 从 GitHub 拉取最新
-git log --oneline           # 看提交历史
-```
-
-> dotfiles 仓库在 `~/`，已关联 GitHub
+| 场景 | 命令 |
+|---|---|
+| **图形界面操作（推荐）** | `lazygit` |
+| 看改了啥 | `git status` |
+| 三连发 | `git add . && git commit -m "x" && git push` |
+| 拉取最新 | `git pull` |
 
 ---
 
-## 🐚 zsh 快捷键
+## 🪟 终端分屏（byobu / tmux）
 
-| 快捷键 | 功能 |
+> 连了服务器要同时做多件事？分屏啊！
+
+```bash
+byobu           # 🎯 启动（底部有状态栏和快捷键提示）
+```
+
+| 按键 | 功能 |
 |---|---|
-| `Ctrl+R` | 模糊搜索历史命令（fzf，超好用） |
-| `Ctrl+T` | 模糊搜索文件名（fzf） |
-| `Tab` 按一下 | 自动补全 |
-| `Tab` 按两下 | 列出所有匹配项 |
-| `Ctrl+D` | 退出终端 |
-| `↑↓` | 上下翻历史（带 fuzzy 补全提示） |
+| `F2` | 新建标签页 |
+| `F3` / `F4` | 切换标签页 |
+| `Ctrl+A` `\|` | 左右分屏 |
+| `Ctrl+A` `-` | 上下分屏 |
+| `Ctrl+A` `←↑↓→` | 切换窗格 |
+| `Ctrl+A` `d` | 断开（程序继续跑） |
+| `byobu -r` | 重新连回来 |
 
 ---
 
 ## 🔍 文件搜索
 
-```bash
-fd <名字>          # 搜索文件/目录名（秒出结果）
-fd -e py           # 只搜索 .py 文件
-fd -I <名字>       # 忽略 .gitignore 限制
+### 找文件名（fd）
 
-rg <关键词>         # 搜索文件内容（秒出结果）
-rg -i <关键词>      # 忽略大小写
-rg -l <关键词>      # 只显示文件名
-rg -C 3 <关键词>    # 显示上下文（上下各3行）
-rg "函数名" --type py   # 只搜 Python 文件
+```bash
+fd .py                   # 所有 Python 文件
+fd -e md                 # 所有 markdown 文件
+fd report                # 搜名字里有 report 的文件/目录
+fd -I large              # 忽略 .gitignore 限制
+```
+
+### 找文件内容（rg，原 ripgrep）
+
+```bash
+rg "def main"            # 搜索代码
+rg -i "error"            # 忽略大小写
+rg -C 3 "TODO"           # 上下各 3 行显示上下文
+rg "class.*Model" --type py  # 只搜 py 文件
+```
+
+> **fd 和 rg 是日常最高频的工具** —— 找东西不必再用鼠标点点点。
+
+---
+
+## 📖 查看文件 & 系统监控
+
+### 文件查看
+
+```bash
+bat config.json          # 带语法高亮和行号（比 cat 好用太多）
+cat file.txt             # 纯文本输出（已 alias 到 bat -pp）
+```
+
+### 命令速查
+
+```bash
+tldr tar                 # tar 的常用用法，不看废话
+tldr ffmpeg              # 视频处理
+tldr rg fd bat           # 搜这些工具的用法
+```
+
+### 系统监控
+
+```bash
+btop                     # 🎯 酷炫系统监控（CPU/内存/网络实时图表）
+htop                     # 另一个（更轻量）
 ```
 
 ---
 
-## 📖 查看文件
+## 📁 智能目录跳转
 
 ```bash
-bat <文件>          # 带语法高亮和行号查看文件（最常用）
-cat <文件>          # 纯文本输出（已有 alias）
+cd ~/Desktop/project/python/src  # 先去一次，zoxide 就学会了
 
-tldr <命令>         # 🎯 命令速查，比 man 手册实用一百倍
-tldr tar           # 例：查看 tar 的常用用法
-tldr ffmpeg        # 例：视频处理
-tldr rg            # 例：查看 rg 的用法
-tldr --list        # 列出所有可查的命令
+z desktop                # 下次直接跳 → ~/Desktop
+z src                    # → project/python/src  
+z dot                    # → dotfiles 目录
+zi                       # 交互式选择（模糊搜索）
 ```
+
+> **zoxide 是你用越久越聪明的工具。** 不用刻意学，多用 `z` 自然就习惯。
 
 ---
 
 ## ✏️ Neovim 编辑器
 
 ```bash
-vi <文件>           # 打开文件编辑（alias 到 nvim）
+vi file.py               # 打开编辑
 ```
 
-### 常用快捷键
-
-```
-:q     退出
-:q!    强制退出（不保存）
-:w     保存
-:wq    保存退出
-dd     删除当前行
-yy     复制当前行
-p      粘贴
-u      撤销
-Ctrl+r 重做
-gg     跳到文件开头
-G      跳到文件末尾
-/关键词  搜索（n 下一个，N 上一个）
-:set nu  显示行号
-```
+| 快捷键 | 功能 |
+|---|---|
+| `:q` / `:wq` | 退出 / 保存退出 |
+| `dd` / `yy` / `p` | 删行 / 复制行 / 粘贴 |
+| `u` / `Ctrl+r` | 撤销 / 重做 |
+| `gg` / `G` | 文件头 / 文件尾 |
+| `/关键词` + `n` / `N` | 搜索 / 下一个 / 上一个 |
 
 ---
 
-## 📁 快速目录跳转
+## 🐚 终端快捷键
+
+| 快捷键 | 功能 |
+|---|---|
+| `Ctrl+R` | **模糊搜索历史命令**（最实用！） |
+| `Ctrl+T` | **模糊搜索文件名** |
+| `Tab` 按一下 | 自动补全 |
+| `Tab` 按两下 | 列出所有可能项 |
+
+---
+
+## 🐍 Python 环境（conda / mamba）
 
 ```bash
-z <关键词>          # 跳到常用目录
-z down             # 跳到 ~/Downloads（如果有这个目录历史）
-z dot              # 跳到 dotfiles 相关目录
+# mamba 比 conda 快很多，日常用它
+mamba create -n project python=3.12   # 新建环境
+mamba activate project                # 激活环境
+mamba install numpy pandas            # 装包
+mamba deactivate                      # 退出
+
+# 其他
+conda env list                        # 列出所有环境
 ```
 
-> 用的是 oh-my-zsh 的 `z` 插件，自动根据你的访问频率跳转
+---
+
+## 🟢 Node.js 环境（nvm）
+
+```bash
+nvm install --lts                     # 安装最新 LTS
+nvm use 20                            # 切换版本
+nvm ls                                # 列出已装版本
+node -v && npm -v                     # 查看当前版本
+```
 
 ---
 
-## 📦 已安装的工具一览
+## 📦 已安装工具总表
 
-| 工具 | 用途 | 安装位置 |
+| 工具 | 用来干什么 | 怎么启动 |
 |---|---|---|
-| `zsh` | 增强版 shell | `~/.local/bin/zsh` |
-| `nvim` | 终端编辑器 | `~/.local/bin/nvim` |
-| `lazygit` | Git 图形界面 | `~/.local/bin/lazygit` |
-| `bat` | 文件查看(高亮) | `~/.local/bin/bat` |
-| `rg` (ripgrep) | 搜索文件内容 | `~/.local/bin/rg` |
-| `fd` | 搜索文件名 | `~/.local/bin/fd` |
-| `fzf` | 模糊搜索 | `~/.fzf/bin/fzf` |
-| `tldr` | 命令速查 | pip 安装 |
-| `starship` | 提示符美化 | `~/.local/bin/starship` |
+| **zsh** | 增强版 shell（自动补全、主题） | 开终端即是 |
+| **starship** | 命令提示符（显示 git 分支、时间等） | 自动 |
+| **zoxide** | 智能跳转目录 | `z <关键词>` |
+| **fzf** | 模糊搜索（Ctrl+R 搜历史等） | `Ctrl+R` / `Ctrl+T` |
+| **bat** | 文件查看（语法高亮） | `bat <文件>` |
+| **fd** | 搜索文件名 | `fd <关键词>` |
+| **rg** | 搜索文件内容 | `rg <关键词>` |
+| **lazygit** | Git 图形界面 | `lazygit` |
+| **nvim** | 终端编辑器 | `vi <文件>` |
+| **yazi** | 文件管理器 | `yazi` |
+| **ranger** | 另一文件管理器 | `ranger` |
+| **byobu** | 终端分屏 | `byobu` |
+| **btop** | 系统监控（酷炫） | `btop` |
+| **htop** | 系统监控（轻量） | `htop` |
+| **tldr** | 命令速查 | `tldr <命令>` |
+| **conda / mamba** | Python 环境管理 | `mamba create / install` |
+| **nvm** | Node.js 版本管理 | `nvm install / use` |
+| **oh-my-zsh** | zsh 插件框架 | 自动 |
 
 ---
 
-> 💡 记不住？终端里输入 `cheatsheet` 或 `cs` 或 `helpme` 就能看到精简版
-
----
-
-## 🚀 换新电脑时一键恢复
+## 🚀 换新电脑时
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/rujingyuan6-dev/dotfiles/master/bootstrap.sh)
 ```
 
-这条命令会：
-1. 克隆 dotfiles 配置到 `~`（冲突文件自动备份）
-2. 安装全部工具到 `~/.local/bin`
-3. 安装 Oh My Zsh、Nerd Font、nvim 插件
-4. 设置 starship 主题
+一条命令恢复全部配置和工具。
+
+---
+
+## 💡 记不住怎么办？
+
+```
+cheatsheet    # 终端里随时看精简版
+cs            # 同上（更短）
+tldr <命令>   # 查任何命令怎么用
+```
+
+> **用得多自然就熟了** —— 头几天刻意用 `z`、`fd`、`rg`、`Ctrl+R`，三天后就会变成肌肉记忆。
