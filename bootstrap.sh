@@ -327,6 +327,24 @@ CONDARC
   ok "conda 已安装"
 fi
 
+# podman（rootless 容器引擎，替代 docker）
+if ! command -v podman &>/dev/null && [[ -f "$HOME/miniconda3/bin/conda" ]]; then
+  info "安装 podman（rootless 容器引擎）..."
+  "$HOME/miniconda3/bin/mamba" install -y podman -c conda-forge 2>/dev/null
+  # 配置
+  mkdir -p "$HOME/.config/containers"
+  cat > "$HOME/.config/containers/policy.json" << 'EOF'
+{"default": [{"type": "insecureAcceptAnything"}]}
+EOF
+  cat > "$HOME/.config/containers/containers.conf" << 'EOF'
+[network]
+default_rootless_network_cmd = "slirp4netns"
+EOF
+  command -v podman &>/dev/null && ok "podman 安装成功" || warn "podman 安装失败"
+elif command -v podman &>/dev/null; then
+  ok "podman 已安装"
+fi
+
 # ---------- 7. 安装字体 ----------
 info "\n=== 字体 ==="
 if [[ ! -f "$HOME/.local/share/fonts/HackNerdFont-Regular.ttf" ]]; then

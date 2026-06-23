@@ -146,6 +146,7 @@ cheatsheet() {
 
 🐍 Python  ➜  mamba install/create
 🟢 Node    ➜  nvm install --lts
+🐳 容器    ➜  podman run/pull     # docker 别名 = podman
 💾 备份    ➜  lazygit → push
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -175,3 +176,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+# docker → podman 别名（没有 root 权限时用 podman）
+alias docker='podman'
+export DOCKER_HOST=''
