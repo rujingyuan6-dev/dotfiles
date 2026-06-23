@@ -233,6 +233,40 @@ node -v && npm -v                     # 查看当前版本
 
 ---
 
+## 🔬 生信分析工作流：本地编辑 + 服务器跑计算
+
+```bash
+# ── 第1步：本地写脚本 ──
+cd ~/Desktop && mkdir -p my_project && cd my_project
+vi run_analysis.sh          # 或 micro run_analysis.sh
+
+# ── 第2步：传到服务器 ──
+scp run_analysis.sh server:~/my_project/
+# 如果有数据: scp sample.fastq server:~/my_project/
+# 一键推整个目录: scp -r . server:~/my_project/
+
+# ── 第3步：SSH 上服务器跑分析 ──
+ssh server
+cd ~/my_project
+byobu                    # 防断开（关键！）
+conda activate bio
+bash run_analysis.sh     # 跑吧，几小时那种
+# Ctrl+A → d  断开，去吃饭 💤
+# 关终端，程序继续跑
+
+# ── 第4步：回来检查 ──
+ssh server
+byobu -r                 # 重新连上
+
+# ── 第5步：结果拉回本地 ──
+scp server:~/my_project/results.txt ~/Desktop/my_project/
+bat results.txt
+```
+
+> 记住这条链：**本地写 → scp → 服务器 byobu 跑 → 本地看结果**
+
+---
+
 ## 🚀 换新电脑时
 
 ```bash

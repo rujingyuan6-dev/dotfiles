@@ -153,6 +153,7 @@ cheatsheet() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🔑 Ctrl+R 搜历史 | Ctrl+T 搜文件 | Tab 补全
 📖 完整文档: cat ~/CHEATSHEET.md
+🔬 工作流: CHEATSHEET 搜 "生信分析"
 🌐 GitHub: rujingyuan6-dev/dotfiles
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
