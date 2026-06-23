@@ -1,0 +1,12 @@
+[config]
+show_hidden = true
+scroll_offset = 4
+sort_directories_first = true
+
+[display]
+column_ratio = [1, 3, 4]
+show_preview = true
+
+[preview]
+preview_script = ""
+max_preview_size = 1048576

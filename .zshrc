@@ -137,6 +137,7 @@ cheatsheet() {
 
 📂 Git  ➜  lazygit                图形界面，不用记命令
 📁 跳转 ➜  z <关键词>             zoxide 智能跳目录
+📂 文件  ➜  yazi / joshuto        终端文件管理器
 🔍 文件 ➜  fd <词>  内容 ➜ rg <词>
 📖 查看 ➜  bat <文件>             带高亮的 cat
 ✏️ 编辑  ➜  vi <文件>             nvim 编辑器

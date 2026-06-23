@@ -219,8 +219,9 @@ node -v && npm -v                     # 查看当前版本
 | **rg** | 搜索文件内容 | `rg <关键词>` |
 | **lazygit** | Git 图形界面 | `lazygit` |
 | **nvim** | 终端编辑器 | `vi <文件>` |
-| **yazi** | 文件管理器 | `yazi` |
-| **ranger** | 另一文件管理器 | `ranger` |
+| **yazi** | 文件管理器 (Rust) | `yazi` |
+| **joshuto** | 文件管理器 (Rust) | `joshuto` |
+| **ranger** | 文件管理器 (Python) | `ranger` |
 | **byobu** | 终端分屏 | `byobu` |
 | **btop** | 系统监控（酷炫） | `btop` |
 | **htop** | 系统监控（轻量） | `htop` |
