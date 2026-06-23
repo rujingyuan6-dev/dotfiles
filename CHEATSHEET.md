@@ -164,6 +164,22 @@ vi file.py               # 打开编辑
 
 ---
 
+## 🐳 容器（Podman / Docker）
+
+> 没有 root 权限，所以用 Podman 替代 Docker。命令完全兼容。
+
+```bash
+docker ps                    # 查看运行中的容器（实际是 podman）
+docker images                # 列出镜像
+docker pull nginx            # 拉取镜像
+docker run -it ubuntu bash   # 运行容器
+docker run --network=host -it ubuntu bash   # 如果网络有问题加这个
+docker stop <容器ID>
+docker rm <容器ID>
+```
+
+---
+
 ## 🐍 Python 环境（conda / mamba）
 
 ```bash
@@ -211,6 +227,7 @@ node -v && npm -v                     # 查看当前版本
 | **tldr** | 命令速查 | `tldr <命令>` |
 | **conda / mamba** | Python 环境管理 | `mamba create / install` |
 | **nvm** | Node.js 版本管理 | `nvm install / use` |
+| **podman** | 容器引擎（代替 Docker） | `docker ps / run / pull` |
 | **oh-my-zsh** | zsh 插件框架 | 自动 |
 
 ---

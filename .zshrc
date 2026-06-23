@@ -146,7 +146,7 @@ cheatsheet() {
 
 🐍 Python  ➜  mamba install/create
 🟢 Node    ➜  nvm install --lts
-🐳 容器    ➜  podman run/pull     # docker 别名 = podman
+🐳 容器  ➜  docker ps/run/pull    # podman（不需要 root）
 💾 备份    ➜  lazygit → push
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
