@@ -1,6 +1,7 @@
 # 🧰 工具速查手册
 
 > 记不住？终端里输入 `cheatsheet`（或 `cs` / `helpme`）查看精简版
+> 📚 生信底层逻辑详解: `cat ~/notes/bioinformatics.md`
 
 ---
 
