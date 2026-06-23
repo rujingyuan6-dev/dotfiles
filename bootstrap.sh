@@ -249,6 +249,21 @@ else
   ok "yazi 已安装"
 fi
 
+# joshuto
+if ! command -v joshuto &>/dev/null; then
+  info "安装 joshuto..."
+  LATEST=$(curl -s https://api.github.com/repos/kamiyaa/joshuto/releases/latest 2>/dev/null | grep "tag_name" | cut -d'"' -f4)
+  # 如果 latest 获取失败，用已知可用版本
+  VER=${LATEST:-v0.9.9}
+  curl -L -o /tmp/joshuto.tar.gz "https://github.com/kamiyaa/joshuto/releases/download/${VER}/joshuto-${VER#v}-x86_64-unknown-linux-musl.tar.gz" 2>/dev/null
+  cd /tmp && tar xzf joshuto.tar.gz 2>/dev/null
+  DIRNAME="joshuto-${VER#v}-x86_64-unknown-linux-musl"
+  [[ -d "$DIRNAME" ]] && cp "$DIRNAME/joshuto" "$HOME/.local/bin/"
+  chmod +x "$HOME/.local/bin/joshuto" 2>/dev/null && ok "joshuto 安装成功" || warn "joshuto 安装失败"
+else
+  ok "joshuto 已安装"
+fi
+
 # nvm + node
 if [[ ! -d "$HOME/.nvm" ]]; then
   info "安装 nvm + Node.js LTS..."
