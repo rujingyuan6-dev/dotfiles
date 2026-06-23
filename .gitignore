@@ -157,3 +157,4 @@ snap/
 !bootstrap.sh
 miniconda3/
 .nvm/
+!notes/
