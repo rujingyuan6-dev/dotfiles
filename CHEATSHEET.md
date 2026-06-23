@@ -41,7 +41,50 @@ scp file.txt server:~/              # 复制文件到服务器
 
 ---
 
-## 📂 Git 版本控制
+## 🌐 GitHub 项目管理
+
+### 新项目三步走
+
+```bash
+cd ~/Desktop/my_project
+git init
+git add . && git commit -m "init"
+gh repo create my-project --private --source=. --push   # 一行创建+推送
+```
+
+> 私有仓库（`--private`）免费，生信项目建议用私有
+
+### 日常三连
+
+```bash
+lazygit            # 🎯 可视化操作
+# 或命令行：
+git add . && git commit -m "做了什么" && git push
+```
+
+### 生信项目 .gitignore 要点
+
+```gitignore
+# 这些不要提交到 git（太大）
+*.fastq *.fasta *.bam *.sam *.vcf
+*/db/ */database/
+*.png *.jpg results/ logs/
+```
+
+> Git 管代码，数据用 `scp`/`rsync` 传
+
+### 其他有用命令
+
+```bash
+gh repo list                       # 查看所有仓库
+gh repo view 用户名/仓库名          # 查看仓库详情
+gh issue create                    # 记个待办
+gh browse                          # 在浏览器打开当前仓库
+```
+
+---
+
+## 📂 Git 基本操作
 
 | 场景 | 命令 |
 |---|---|
