@@ -140,7 +140,7 @@ cheatsheet() {
 📂 文件  ➜  yazi / joshuto        终端文件管理器
 🔍 文件 ➜  fd <词>  内容 ➜ rg <词>
 📖 查看 ➜  bat <文件>             带高亮的 cat
-✏️ 编辑  ➜  vi <文件>             nvim 编辑器
+✏️ 编辑  ➜  vi <文件>             高级 (nvim)   micro <文件>  简单
 🪟 分屏  ➜  byobu                 终端分屏多任务
 📊 监控  ➜  btop                  系统资源监控
 💡 速查  ➜  tldr <命令>           精简版 man
